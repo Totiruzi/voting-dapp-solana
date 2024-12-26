@@ -91,6 +91,16 @@ describe("voting", () => {
       new anchor.BN(1),
     ).rpc();
 
+    await votingProgram.methods.vote(
+      "Struchy Eggs",
+      new anchor.BN(1),
+    ).rpc();
+
+    await votingProgram.methods.vote(
+      "Fish spread",
+      new anchor.BN(1),
+    ).rpc();
+
     const [fishSpreedAddress] = PublicKey.findProgramAddressSync(
       [new anchor.BN(1).toArrayLike(Buffer, "le", 8), Buffer.from("Fish spread")],
       votingAddress,
@@ -99,7 +109,15 @@ describe("voting", () => {
     const fishSpreedCandidate = await votingProgram.account.candidate.fetch(fishSpreedAddress);
     console.log(fishSpreedCandidate);
 
-    expect(fishSpreedCandidate.candidateVotes.toNumber()).toBe(1);
+    const [struchyAddress] = PublicKey.findProgramAddressSync(
+      [new anchor.BN(1).toArrayLike(Buffer, "le", 8), Buffer.from("Struchy Eggs")],
+      votingAddress,
+    );
+
+    const struchyCandidate = await votingProgram.account.candidate.fetch(struchyAddress);
+
+    expect(fishSpreedCandidate.candidateVotes.toNumber()).toBe(2);
+    expect(struchyCandidate.candidateVotes.toNumber()).toBe(1);
   })
 
 
