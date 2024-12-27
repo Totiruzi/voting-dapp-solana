@@ -13,18 +13,21 @@ const votingAddress = new PublicKey(
 describe("voting", () => {
   let context;
   let provider;
-  let votingProgram: any;
+  // let votingProgram:any;
 
-  beforeAll(async () =>{
-    context = await startAnchor(
-      "",
-      [{ name: "voting", programId: votingAddress }],
-      []
-    );
-    provider = new BankrunProvider(context);
+  anchor.setProvider(anchor.AnchorProvider.env());
+  let votingProgram = anchor.workspace.Voting as Program<Voting>;
 
-    votingProgram = new Program<Voting>(IDL, provider);
-  })
+  // beforeAll(async () =>{
+  //   context = await startAnchor(
+  //     "",
+  //     [{ name: "voting", programId: votingAddress }],
+  //     []
+  //   );
+  //   provider = new BankrunProvider(context);
+
+  //   votingProgram = new Program<Voting>(IDL, provider);
+  // })
 
   // Configure the client to use the local cluster.
   it("Initialize Poll", async() => {
@@ -120,5 +123,5 @@ describe("voting", () => {
     expect(struchyCandidate.candidateVotes.toNumber()).toBe(1);
   })
 
-
+  // Program Id: CAfXJcCc34bYLQFgCmdgSeW1ECuaRemkn8oAaeQrG1fo
 });

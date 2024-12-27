@@ -170,11 +170,11 @@
       ],
       "args": [
         {
-          "name": "candidate_name",
+          "name": "_candidate_name",
           "type": "string"
         },
         {
-          "name": "poll_id",
+          "name": "_poll_id",
           "type": "u64"
         }
       ]

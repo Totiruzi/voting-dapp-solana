@@ -40,8 +40,8 @@ pub mod voting {
 
     pub fn vote(
         ctx: Context<Vote>,
-        candidate_name: String,
-        poll_id: u64
+        _candidate_name: String,
+        _poll_id: u64
     ) -> Result<()> {
         let candidate = &mut ctx.accounts.candidate;
         candidate.candidate_votes += 1;
